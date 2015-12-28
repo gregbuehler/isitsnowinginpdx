@@ -29,7 +29,7 @@ scheduler.every '3m', :first_in => '1s' do |job|
   http = Net::HTTP.new('weather.yahooapis.com')
   response = http.request(Net::HTTP::Get.new("/forecastrss?w=#{woe_id}"))
   weather_data = XmlSimple.xml_in(response.body, { 'ForceArray' => false })['channel']['item']['condition']
-  snowing = true #snowing_conditions.include?(weather_data['code'].to_i)
+  snowing = snowing_conditions.include?(weather_data['code'].to_i)
 end
 
 get '/' do
